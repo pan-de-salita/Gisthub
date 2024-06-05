@@ -3,17 +3,40 @@
   <head>
     <title>Gisthub</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= render "layouts/app_defaults" %>
   </head>
+  <body class='bg-gray-500 text-main'>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <header class='bg-royal-500'>
+      <div class='h-14 px-4 pt-4 pb-2 flex justify-between items-center'>
+        <div class='flex items-center gap-3'>
+          <div
+            class='
+              h-8 w-8 border-2 border-gray-100 rounded-full flex justify-center items-center
+            '
+          >
+            <i class="fa-solid fa-code-commit fa-md text-gray-100"></i>
+          </div>
+          <div
+            class='
+              flex flex-col md:flex-row lg:flex-row md:items-center lg:items-center text-sm
+            '
+          >
+            <span class='text-gray-200'>test_user&nbsp;/&nbsp;</span>
+            <strong class="text-gray-100"><span>some_project</span></strong>
+          </div>
+        </div>
+        <div class='flex items-center'>
+          <%= identicon_for %>
+        </div>
+      </div>
+      <nav class='h-12'>
+      </nav>
+    </header>
+
+    <main class='overflow-auto'>
       <%= yield %>
     </main>
+
   </body>
 </html>
