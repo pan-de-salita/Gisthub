@@ -1,0 +1,87 @@
+<header class='bg-royal-500'>
+  <div class='px-4 h-14 pt-4 pb-2 flex justify-between items-center'>
+    <div class='flex items-center gap-3'>
+      <div
+        class='
+          h-8 w-8 border-2 border-gray-100 rounded-full flex justify-center items-center
+        '
+      >
+        <i class="fa-solid fa-compact-disc fa-md text-gray-100"></i>
+      </div>
+      <div
+        class='
+          flex flex-col md:flex-row lg:flex-row md:items-center lg:items-center text-xs
+        '
+      >
+        <span class='text-gray-200 md:text-sm lg:text-sm'>test_user&nbsp;/&nbsp;</span>
+        <strong class="text-gray-100 text-sm"><span>some_project</span></strong>
+      </div>
+    </div>
+    <div class='flex items-center'>
+      <%= identicon_for %>
+    </div>
+  </div>
+  <nav
+    class='
+      px-4 h-12 flex justify-between items-center border-[1px] border-solid
+      border-[#292C2E] border-t-0 border-l-0 border-r-0
+    '
+  >
+    <ul
+      class='
+        flex items-center gap-5 text-xs md:text-sm lg:text-sm text-gray-100 font-bold
+      '
+    >
+      <% if params[:controller] == 'headquarters' && params[:action] == 'overview' %>
+        <li
+          class='
+            h-12 border-2 border-solid border-red-800 border-t-0 border-l-0 border-r-0 flex
+            items-center
+          '
+        >
+          <a href="/" class='flex items-center gap-2'>
+            <i class="fa-solid fa-book"></i>
+            <span>Overview</span>
+          </a>
+        </li>
+      <% else %>
+        <li
+          class='
+            h-12 border-2 border-solid border-transparent border-t-0 border-l-0 border-r-0
+            flex items-center
+          '
+        >
+          <a href="/" class='flex items-center gap-2'>
+            <i class="fa-solid fa-book"></i>
+            <span>Overview</span>
+          </a>
+        </li>
+      <% end %>
+      <% if params[:controller] == 'headquarters' && params[:action] == 'repositories' %>
+        <li
+          class='
+            h-12 border-2 border-solid border-red-800 border-t-0 border-l-0 border-r-0 flex
+            items-center
+          '
+        >
+          <a href="/headquarters/repositories" class='flex items-center gap-2'>
+            <i class="fa-solid fa-hammer"></i>
+            <span>Projects</span>
+          </a>
+        </li>
+      <% else %>
+        <li
+          class='
+            h-12 border-2 border-solid border-transparent border-t-0 border-l-0 border-r-0
+            flex items-center
+          '
+        >
+          <a href="/headquarters/repositories" class='flex items-center gap-2'>
+            <i class="fa-solid fa-hammer"></i>
+            <span>Projects</span>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+</header>
