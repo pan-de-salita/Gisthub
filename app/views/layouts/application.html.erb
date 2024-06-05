@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= render "layouts/app_defaults" %>
   </head>
-  <body class='bg-gray-500 text-main'>
+  <body class='bg-gray-500 text-gray-100'>
     <%= render "layouts/header" %>
     <main class='overflow-auto'>
       <%= yield %>
     </main>
     <div class='text-red-500'>
-      <h1>
-        <%= debug(params) if Rails.env.development? %>
-      </h1>
+      <span><%= debug(params) if Rails.env.development? %></span>
     </div>
   </body>
 </html>

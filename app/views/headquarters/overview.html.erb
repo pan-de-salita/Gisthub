@@ -1,4 +1,41 @@
-<div>
-  <h1 class="font-bold text-4xl">Headquarters#overview</h1>
-  <p>Find me in app/views/headquarters/overview.html.erb</p>
+<div
+  class='
+    mx-4 mt-2 flex flex-col md:grid md:grid-cols-6 lg:grid lg:grid-cols-6 gap-4 pt-8
+    pb-6
+  '
+>
+  <!-- sidebar -->
+  <aside
+    class='
+      md:col-start-1 md:col-end-3 lg:col-start-2 lg:col-end-3 flex items-center
+      md:flex-col lg:flex-col md:items-start lg:items-start gap-4
+    '
+  >
+    <div class='block md:hidden lg:hidden'>
+      <%= identicon_for identicon_width: 60, identicon_height: 60 %>
+    </div>
+    <div class='hidden md:block lg:hidden'>
+      <%= identicon_for identicon_width: 256, identicon_height: 256 %>
+    </div>
+    <div class='hidden md:hidden lg:block'>
+      <%= identicon_for identicon_width: 296, identicon_height: 296 %>
+    </div>
+    <div class='text-2xl'>
+      <h1 class='font-bold'>Test_User</h1>
+      <div class='text-xl text-gray-200'>
+        <span>Nickname</span>
+        <span>·</span>
+        <span>Pronouns</span>
+      </div>
+    </div>
+  </aside>
+  <!-- dashboard -->
+  <div
+    class='
+      md:col-start-3 md:col-end-7 lg:col-start-3 lg:col-end-6 h-screen flex-grow
+      bg-red-400
+    '
+  >
+
+  </div>
 </div>

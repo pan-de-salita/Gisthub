@@ -6,7 +6,7 @@
           h-8 w-8 border-2 border-gray-100 rounded-full flex justify-center items-center
         '
       >
-        <i class="fa-solid fa-compact-disc fa-md text-gray-100"></i>
+        <i class="fa-solid fa-cat fa-md text-gray-100"></i>
       </div>
       <div
         class='
@@ -29,13 +29,13 @@
   >
     <ul
       class='
-        flex items-center gap-5 text-xs md:text-sm lg:text-sm text-gray-100 font-bold
+        flex items-center gap-6 text-xs md:text-sm lg:text-sm text-gray-100
       '
     >
       <li
         class='
-          h-12 border-2 border-solid border-<%= current_page?(root_path) ? 'red-400' : 'transparent' %>
-          border-t-0 border-l-0 border-r-0 flex items-center
+          h-12 border-2 border-solid <%= current_page?(root_path) ? 'border-red-400 font-bold' : 'border-transparent font-medium' %> border-t-0
+          border-l-0 border-r-0 flex items-center
         '
       >
         <a href="/" class='flex items-center gap-2'>
@@ -45,13 +45,13 @@
       </li>
       <li
         class='
-          h-12 border-2 border-solid border-<%= current_page?(repositories_path) ? 'red-400' : 'transparent'%>
-          border-t-0 border-l-0 border-r-0 flex items-center
+          h-12 border-2 border-solid <%= current_page?(repositories_path) ? 'border-red-400 font-bold' : 'border-transparent font-medium' %> border-t-0
+          border-l-0 border-r-0 flex items-center
         '
       >
         <a href="/repositories" class='flex items-center gap-2'>
           <i class="fa-solid fa-hammer"></i>
-          <span>Projects</span>
+          <span>Repositories</span>
         </a>
       </li>
     </ul>
