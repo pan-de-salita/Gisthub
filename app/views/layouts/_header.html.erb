@@ -32,56 +32,28 @@
         flex items-center gap-5 text-xs md:text-sm lg:text-sm text-gray-100 font-bold
       '
     >
-      <% if params[:controller] == 'headquarters' && params[:action] == 'overview' %>
-        <li
-          class='
-            h-12 border-2 border-solid border-red-800 border-t-0 border-l-0 border-r-0 flex
-            items-center
-          '
-        >
-          <a href="/" class='flex items-center gap-2'>
-            <i class="fa-solid fa-book"></i>
-            <span>Overview</span>
-          </a>
-        </li>
-      <% else %>
-        <li
-          class='
-            h-12 border-2 border-solid border-transparent border-t-0 border-l-0 border-r-0
-            flex items-center
-          '
-        >
-          <a href="/" class='flex items-center gap-2'>
-            <i class="fa-solid fa-book"></i>
-            <span>Overview</span>
-          </a>
-        </li>
-      <% end %>
-      <% if params[:controller] == 'headquarters' && params[:action] == 'repositories' %>
-        <li
-          class='
-            h-12 border-2 border-solid border-red-800 border-t-0 border-l-0 border-r-0 flex
-            items-center
-          '
-        >
-          <a href="/headquarters/repositories" class='flex items-center gap-2'>
-            <i class="fa-solid fa-hammer"></i>
-            <span>Projects</span>
-          </a>
-        </li>
-      <% else %>
-        <li
-          class='
-            h-12 border-2 border-solid border-transparent border-t-0 border-l-0 border-r-0
-            flex items-center
-          '
-        >
-          <a href="/headquarters/repositories" class='flex items-center gap-2'>
-            <i class="fa-solid fa-hammer"></i>
-            <span>Projects</span>
-          </a>
-        </li>
-      <% end %>
+      <li
+        class='
+          h-12 border-2 border-solid border-<%= current_page?(root_path) ? 'red-400' : 'transparent' %>
+          border-t-0 border-l-0 border-r-0 flex items-center
+        '
+      >
+        <a href="/" class='flex items-center gap-2'>
+          <i class="fa-solid fa-book"></i>
+          <span>Overview</span>
+        </a>
+      </li>
+      <li
+        class='
+          h-12 border-2 border-solid border-<%= current_page?(repositories_path) ? 'red-400' : 'transparent'%>
+          border-t-0 border-l-0 border-r-0 flex items-center
+        '
+      >
+        <a href="/repositories" class='flex items-center gap-2'>
+          <i class="fa-solid fa-hammer"></i>
+          <span>Projects</span>
+        </a>
+      </li>
     </ul>
   </nav>
 </header>
