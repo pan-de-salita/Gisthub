@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_06_050349) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_06_061935) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_050349) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_languages_on_user_id"
   end
 
   create_table "solutions", force: :cascade do |t|
@@ -28,6 +30,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_050349) do
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "language_id", null: false
+    t.index ["language_id"], name: "index_solutions_on_language_id"
+    t.index ["user_id"], name: "index_solutions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -39,4 +45,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_050349) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "languages", "users"
+  add_foreign_key "solutions", "languages"
+  add_foreign_key "solutions", "users"
 end
