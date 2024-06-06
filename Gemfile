@@ -64,9 +64,14 @@ group :development do
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
+  gem 'guard'
+  gem 'guard-minitest'
+  gem 'minitest'
+  gem 'minitest-reporters'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
+  gem 'webdrivers'
 end
 
 gem 'font-awesome-sass'

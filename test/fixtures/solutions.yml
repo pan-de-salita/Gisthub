@@ -3,13 +3,13 @@
 one:
   title: MyString
   instructions: MyText
-  solution: MyText
+  attempt: MyText
   language: MyString
-  category: MyString
+  categories: MyString
 
 two:
   title: MyString
   instructions: MyText
-  solution: MyText
+  attempt: MyText
   language: MyString
-  category: MyString
+  categories: MyString
