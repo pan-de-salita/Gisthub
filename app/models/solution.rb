@@ -1,11 +1,11 @@
 class Solution < ApplicationRecord
   belongs_to :user
-  belongs_to :solution
+  belongs_to :language
   before_save { title.capitalize! }
-  before_save { language.capitalize! }
+  before_save { programming_language.capitalize! }
 
   validates :title, presence: true, length: { maximum: 60 }
   validates :instructions, presence: true
-  validates :solution, presence: true
-  validates :language, presence: true
+  validates :attempt, presence: true
+  validates :programming_language, presence: true
 end
