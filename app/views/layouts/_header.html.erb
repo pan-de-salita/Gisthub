@@ -6,15 +6,15 @@
           h-8 w-8 border-2 border-gray-100 rounded-full flex justify-center items-center
         '
       >
-        <i class="fa-solid fa-cat fa-md text-gray-100"></i>
+        <a href="/"><i class="fa-solid fa-vial fa-md text-gray-100"></i></a>
       </div>
       <div
         class='
           flex flex-col md:flex-row lg:flex-row md:items-center lg:items-center text-xs
         '
       >
-        <span class='text-gray-200 md:text-sm lg:text-sm'>test_user&nbsp;/&nbsp;</span>
-        <strong class="text-gray-100 text-sm"><span>some_project</span></strong>
+        <span class='text-gray-200 md:text-sm lg:text-sm'>Solvent&nbsp;/&nbsp;</span>
+        <strong class="text-gray-100 text-sm"><span>Test_User</span></strong>
       </div>
     </div>
     <div class='flex items-center'>
@@ -29,7 +29,7 @@
   >
     <ul
       class='
-        flex items-center gap-6 text-xs md:text-sm lg:text-sm text-gray-100
+        flex items-center gap-4 text-xs md:text-sm lg:text-sm text-gray-100
       '
     >
       <li
@@ -39,19 +39,19 @@
         '
       >
         <a href="/" class='flex items-center gap-2'>
-          <i class="fa-solid fa-book"></i>
+          <i class="fa-solid fa-book-open"></i>
           <span>Overview</span>
         </a>
       </li>
       <li
         class='
-          h-12 border-2 border-solid <%= current_page?(repositories_path) ? 'border-red-400 font-bold' : 'border-transparent font-medium' %> border-t-0
+          h-12 border-2 border-solid <%= current_page?(solutions_path) ? 'border-red-400 font-bold' : 'border-transparent font-medium' %> border-t-0
           border-l-0 border-r-0 flex items-center
         '
       >
-        <a href="/repositories" class='flex items-center gap-2'>
-          <i class="fa-solid fa-hammer"></i>
-          <span>Repositories</span>
+        <a href="/solutions" class='flex items-center gap-2'>
+          <i class="fa-solid fa-flask-vial"></i>
+          <span>Solutions</span>
         </a>
       </li>
     </ul>

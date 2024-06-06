@@ -1,7 +1,5 @@
 class HeadquartersController < ApplicationController
-  def overview
-  end
+  def overview; end
 
-  def repositories
-  end
+  def solutions; end
 end

@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
   root 'headquarters#overview'
-  get '/repositories', to: 'headquarters#repositories'
+  get '/solutions', to: 'headquarters#solutions'
 end
