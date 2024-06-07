@@ -10,6 +10,11 @@ class Solution < ApplicationRecord
   validates :instructions, presence: true
   validates :attempt, presence: true
   validates :programming_language, presence: true
+  validates :tags, presence: true
+  validates :user_id, presence: true
+  validates :language_id, presence: true
+  validate :user_must_exist
+  validate :language_must_exist
 
   private
 
@@ -23,5 +28,13 @@ class Solution < ApplicationRecord
       new_language = Language.create(name: programming_language, user_id: current_user_id)
       self.language_id = new_language.id
     end
+  end
+
+  def user_must_exist
+    errors.add(:user_id, 'must exist') unless User.exists?(id: user_id)
+  end
+
+  def language_must_exist
+    errors.add(:language_id, 'must exist') unless Language.exists?(id: language_id)
   end
 end

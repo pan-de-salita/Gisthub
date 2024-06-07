@@ -13,6 +13,10 @@ class LanguageTest < ActiveSupport::TestCase
     @test_language_y = Language.new(name: 'Elixir', user_id: @user_for_language_tests.id)
   end
 
+  test 'test_languages should be valid' do
+    assert @test_language_x.valid? && @test_language_y.valid?
+  end
+
   test 'Language name should not be blank' do
     @test_language_x.name = '   '
     assert_not @test_language_x.valid?
