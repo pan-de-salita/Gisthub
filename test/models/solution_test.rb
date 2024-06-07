@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class SolutionTest < ActiveSupport::TestCase
+  SOLUTION_ATTRIBUTES = %w[title instructions attempt programming_language tags user_id language_id].freeze
+
   setup do
     @user_for_solution_tests = User.create(
       alias: 'Solution Test',
@@ -26,9 +30,7 @@ class SolutionTest < ActiveSupport::TestCase
   end
 
   test 'all fields must not be blank' do
-    solution_attributes = %w[title instructions attempt programming_language tags user_id language_id]
-
-    solution_attributes.each do |solution_attribute|
+    SOLUTION_ATTRIBUTES.each do |solution_attribute|
       @test_solution.send("#{solution_attribute}=", '    ')
       assert_not @test_solution.valid?
     end
