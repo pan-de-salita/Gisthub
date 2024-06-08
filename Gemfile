@@ -74,5 +74,6 @@ group :test do
   gem 'webdrivers'
 end
 
+gem 'chartkick'
 gem 'font-awesome-sass'
 gem 'ruby_identicon'

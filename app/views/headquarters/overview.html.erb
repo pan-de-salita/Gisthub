@@ -11,30 +11,87 @@
       class='
         md:min-w-[256px] lg:min-w-[296px] md:col-start-1 md:col-end-3 lg:col-start-1
         lg:col-end-3 flex items-center md:flex-col lg:flex-col md:items-start
-        lg:items-start gap-4
+        lg:items-start gap-4 border-[1px] border-solild border-gray-150 border-t-0
+        border-l-0 border-r-0 md:border-0 lg:border-0 pb-10 md:pb-0 lg:pb-0
       '
     >
-      <div class='block md:hidden lg:hidden'>
-        <%= identicon_for identicon_width: 60, identicon_height: 60 %>
-      </div>
-      <div class='hidden md:block lg:hidden'>
-        <%= identicon_for identicon_width: 256, identicon_height: 256 %>
-      </div>
-      <div class='hidden md:hidden lg:block'>
-        <%= identicon_for identicon_width: 296, identicon_height: 296 %>
-      </div>
-      <div class='text-2xl'>
-        <h1 class='font-bold'>Test_User</h1>
-        <div class='text-xl text-gray-200'>
-          <span>Nickname</span>
-          <span>·</span>
-          <span>Pronouns</span>
+      <div class='w-full flex flex-col gap-4'>
+        <div class='flex gap-4 md:flex-col lg:flex-col'>
+          <div class='block md:hidden lg:hidden'>
+            <%= identicon_for user: @user, identicon_width: 60, identicon_height: 60 %>
+          </div>
+          <div class='hidden md:block lg:hidden'>
+            <%= identicon_for user: @user, identicon_width: 256, identicon_height: 256 %>
+          </div>
+          <div class='hidden md:hidden lg:block'>
+            <%= identicon_for user: @user, identicon_width: 296, identicon_height: 296 %>
+          </div>
+          <div>
+            <h1 class='font-bold text-2xl'>
+              <%= @user.alias %>
+            </h1>
+            <div class='text-xl text-gray-200'>
+              <span><%= @user.email %></span>
+            </div>
+          </div>
         </div>
+        <div class='text-md'>
+          <p><%= @user.bio %></p>
+        </div>
+        <button
+          class='
+            w-full bg-gray-300 border-[1px] border-solid border-gray-150 rounded-md py-1
+          '
+        >
+          <span class='text-sm'>Edit profile</span>
+        </button>
       </div>
     </aside>
     <!-- dashboard -->
-    <div class='md:col-start-3 lg:col-start-3 h-screen bg-red-400 '>
-
+    <div class='md:col-start-3 lg:col-start-3 flex flex-col'>
+      <div class='flex flex-col gap-2'>
+        <h2>Top languages</h2>
+        <div
+          class='
+            flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap gap-4
+          '
+        >
+          <% @top_four_languages.each do |language, count| %>
+            <div
+              class='
+                w-full px-4 py-4 md:w-[49%] lg:w-[49%] border-[1px] border-solid border-gray-150
+                rounded-md text-sm flex flex-col gap-4
+              '
+            >
+              <div class='flex justify-between'>
+                <div class='flex gap-2 items-center'>
+                  <i class="fa-solid fa-keyboard"></i>
+                  <span class='font-bold'><%= language %></span>
+                  <div class='flex items-center h-full'>
+                    <span
+                      class='
+                        border-[1px] border-solid border-gray-150 rounded-2xl px-2 text-gray-200 text-xs
+                      '
+                    ><%= count %>
+                    </span>
+                  </div>
+                </div>
+                <div class='text-gray-200'>
+                  <span>Last use:</span>
+                  <span><%= @user.solutions_in(language).last.created_at.strftime("%B %d") %></span>
+                </div>
+              </div>
+              <div class='flex flex-col gap-2 h-full'>
+                <div class='flex text-md'>
+                  <span class='text-green-500 font-bold'>Last solve:&nbsp;</span>
+                  <span><%= @user.solutions_in(language).last.title %></span>
+                </div>
+                <span class='text-sm text-gray-200 truncate'><%= @user.solutions_in(language).last.instructions %></span>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

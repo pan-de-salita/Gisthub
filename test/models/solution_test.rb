@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'test_helper'
 
 class SolutionTest < ActiveSupport::TestCase
@@ -46,6 +44,13 @@ class SolutionTest < ActiveSupport::TestCase
     assert_not @test_solution.valid?
   end
 
+  test 'Solution programming_language should be capitalized before validation' do
+    downcase_programming_language = 'rooby'
+    @test_solution.programming_language = downcase_programming_language
+    @test_solution.save
+    assert_equal downcase_programming_language.capitalize!, @test_solution.programming_language
+  end
+
   # iter 1:
   # test 'Specifying a non-existent programming_language when making a Solution creates the corresponding Language instance, thus making the Solution valid' do
   #   unless Language.find_by(name: 'Clojure')
@@ -57,7 +62,7 @@ class SolutionTest < ActiveSupport::TestCase
 
   test 'Specifying a non-existent programming_language when making a Solution creates the corresponding Language instance, thus making the Solution valid' do
     initial_language_count = Language.count
-    @test_solution.programming_language = 'Clojure'
+    @test_solution.programming_language = 'rust' # capitalized upon save
     @test_solution.save
     assert Language.count == initial_language_count + 1
     assert @test_solution.valid?

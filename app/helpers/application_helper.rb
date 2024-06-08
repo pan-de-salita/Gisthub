@@ -7,14 +7,14 @@ module ApplicationHelper
     identicon_height: 32
   )
     base64_identicon = RubyIdenticon.create_base64(
-      (user.empty? ? 'default' : user.email),
+      (user.instance_of?(User) ? user.email : 'default'),
       background_color: 2_022_162_301,
       grid_size: identicon_grid_size,
       square_size: identicon_square_size
     )
     image_tag(
       "data:image/png;base64,#{base64_identicon}",
-      alt: (user.empty? ? 'default identicon' : user.name),
+      alt: (user.instance_of?(User) ? user.email : 'default'),
       width: identicon_width,
       height: identicon_height,
       class: 'rounded-full'

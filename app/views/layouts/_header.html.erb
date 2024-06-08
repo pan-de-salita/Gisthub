@@ -14,17 +14,19 @@
         '
       >
         <span class='text-gray-200 md:text-sm lg:text-sm'>Solvent&nbsp;/&nbsp;</span>
-        <strong class="text-gray-100 text-sm"><span>Test_User</span></strong>
+        <strong class="text-gray-100 text-sm">
+          <span><%= @user.alias %></span>
+        </strong>
       </div>
     </div>
     <div class='flex items-center'>
-      <%= identicon_for %>
+      <%= identicon_for user: @user %>
     </div>
   </div>
   <nav
     class='
       px-4 h-12 flex justify-between items-center border-[1px] border-solid
-      border-[#292C2E] border-t-0 border-l-0 border-r-0
+      border-gray-150 border-t-0 border-l-0 border-r-0
     '
   >
     <ul
