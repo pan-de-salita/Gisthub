@@ -1,0 +1,90 @@
+<div class='flex flex-col pb-4'>
+  <div class=' flex items-center gap-2 text-lg p-4 '>
+    <h1 class='h-8'>
+      <%= if params[:programming_language]
+        "#{@user.alias} / solutions / #{params[:programming_language]}"
+      else
+        "#{@user.alias} / solutions"
+      end %>
+    </h1>
+    <span
+      class='
+        border-[1px] border-solid border-gray-150 rounded-xl px-2 text-gray-200 text-sm
+      '
+    >
+      <%= if params[:programming_language]
+        @user.solutions_in(params[:programming_language]).count
+      else
+        @solutions.count
+      end %>
+    </span>
+  </div>
+  <div class='flex flex-col gap-4 px-4'>
+    <% solutions_to_show =
+      (
+        if params[:programming_language]
+          @user.solutions_in(params[:programming_language])
+        else
+          @solutions
+        end
+      ) %>
+    <% if !solutions_to_show.empty? %>
+      <% solutions_to_show.each do |solution| %>
+        <div
+          class='
+            flex flex-col gap-2 pb-4 rounded-md border-[1px] border-solid border-gray-150
+          '
+        >
+          <div class='flex flex-col gap-2 flex-grow'>
+            <div class='rounded-t-md py-4 px-4 bg-gray-600 flex items-center'>
+              <span class='text-md font-bold'><%= solution.title %></span>
+            </div>
+            <p class='px-4 text-sm text-gray-200 '>
+              <%= solution.instructions %>
+            </p>
+            <span class='px-4 text-sm text-green-400 font-bold'>Solution:</span>
+            <code
+              class='
+                text-xs px-4 py-6 border-[1px] border-solid border-gray-150 border-l-0
+                border-r-0 bg-royal-500
+              '
+            >
+              <%= solution.attempt %>
+            </code>
+            <div class='px-4 flex items-center '>
+              <span class='text-xs'>
+                Tags:&nbsp;&nbsp;
+              </span>
+              <ul class='flex flex-wrap gap-2'>
+                <% solution.tags.each do |tag| %>
+                  <li
+                    class='
+                      text-xs border-[1px] border-solid border-gray-150 px-2 py-1 rounded-md
+                    '
+                  ><%= tag %></li>
+                <% end %>
+              </ul>
+            </div>
+            <div class='text-sm px-4 text-blue-500'>
+              <%= link_to "Refactor", "#" %>
+              <span class='text-gray-100'>&nbsp;·&nbsp;</span>
+              <%= link_to "Delete", "#" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div
+        class='
+          px-4 py-2 w-full flex items-center border-[1px] border-solid border-gray-150
+          rounded-md
+        '
+      >
+        <div class='flex flex-col text-sm'>
+          <span>Oops! No solutions yet...</span>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>

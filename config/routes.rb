@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   resources :users do
-    resources :languages do
-      resources :solutions
+    resources :languages
+    resources :solutions do
+      get 'in_language', action: :index
     end
   end
 
-  root 'headquarters#overview'
-  get '/solutions', to: 'headquarters#solutions'
+  get '/overview/', to: 'headquarters#overview', as: 'overview'
+  get 'solutions', to: 'solutions#index', as: 'solutions'
+  get 'solutions/in_language/:programming_language', to: 'solutions#index', as: 'solutions_in_language'
 end

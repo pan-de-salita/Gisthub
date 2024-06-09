@@ -1,0 +1,10 @@
+Rails.application.routes.draw do
+  resources :users do
+    resources :languages do
+      resources :solutions
+    end
+  end
+
+  root '/:id', to: 'headquarters#overview'
+  get '/solutions', to: 'headquarters#solutions'
+end

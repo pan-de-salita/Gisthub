@@ -1,4 +1,52 @@
-<div>
-  <h1 class="font-bold text-4xl">Headquarters#repositories</h1>
-  <p>Find me in app/views/headquarters/repositories.html.erb</p>
+<div
+  class='
+    min-h-svh flex justify-between gap-0 border-[1px] border-solid border-gray-150
+    border-t-0 border-l-0 border-r-0
+  '
+>
+  <div
+    class='
+      hidden md:block lg:block min-w-80 border-[1px] border-solid border-gray-150
+      border-t-0 border-l-0 border-b-0
+    '
+  >
+    <div class='h-full flex flex-col text-md'>
+      <div
+        class='
+          text-lg border-[1px] border-solid border-gray-150 border-t-0 border-l-0
+          border-r-0 p-4 flex justify-between items-center
+        '
+      >
+        <h2>Languages</h2>
+        <button class='h-8 w-8 border-[1px] border-solid border-gray-400 rounded-md'>
+          <i class="fa-solid fa-plus text-gray-400 text-sm"></i>
+        </button>
+      </div>
+      <div class='h-full p-4 text-sm overflow-auto'>
+        <div class='justify-center pb-2'>
+          <div class='flex items-center gap-2'>
+            <i class="fa-solid fa-glasses text-gray-400"></i>
+            <%= @user.alias %>
+          </div>
+        </div>
+        <% @languages.each do |language| %>
+          <div class='flex items-center gap-2 pl-2 pb-2'>
+            <i class="fa-solid fa-keyboard text-gray-400"></i>
+            <%= language.name %>
+            <span
+              class='
+                border-[1px] border-solid border-gray-150 rounded-2xl px-2 text-gray-200 text-xs
+              '
+            >
+              <%= language.solutions.count %>
+            </span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div>
+
+  </div>
 </div>

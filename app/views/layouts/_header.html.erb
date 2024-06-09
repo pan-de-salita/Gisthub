@@ -36,22 +36,22 @@
     >
       <li
         class='
-          h-12 border-2 border-solid <%= current_page?(root_path) ? 'border-red-400 font-bold' : 'border-transparent font-medium' %> border-t-0
+          h-12 border-2 border-solid <%= current_page?(overview_path) ? 'border-red-400 font-bold' : 'border-transparent font-medium' %> border-t-0
           border-l-0 border-r-0 flex items-center
         '
       >
-        <a href="/" class='flex items-center gap-2'>
+        <a href="<%= overview_path %>" class='flex items-center gap-2'>
           <i class="fa-solid fa-book-open"></i>
           <span>Overview</span>
         </a>
       </li>
       <li
         class='
-          h-12 border-2 border-solid <%= current_page?(solutions_path) ? 'border-red-400 font-bold' : 'border-transparent font-medium' %> border-t-0
+          h-12 border-2 border-solid <%= request.path.include?('solution') ? 'border-red-400 font-bold' : 'border-transparent font-medium' %> border-t-0
           border-l-0 border-r-0 flex items-center
         '
       >
-        <a href="/solutions" class='flex items-center gap-2'>
+        <a href="<%= solutions_path %>" class='flex items-center gap-2'>
           <i class="fa-solid fa-flask-vial"></i>
           <span>Solutions</span>
         </a>
