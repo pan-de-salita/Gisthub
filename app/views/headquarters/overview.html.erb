@@ -49,11 +49,11 @@
     </aside>
     <!-- dashboard -->
     <div class='md:col-start-3 lg:col-start-3 flex flex-col gap-8'>
-      <div class='flex flex-col gap-2'>
+      <div class='flex flex-col gap-4'>
         <h2>Top languages</h2>
         <div
           class='
-            flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap gap-2
+            flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap gap-4
           '
         >
           <% if @top_four_languages.empty? %>
@@ -106,7 +106,7 @@
         </div>
       </div>
 
-      <div class='flex flex-col gap-2'>
+      <div class='flex flex-col gap-4'>
         <h2>Practice frequency</h2>
         <div class='border-[1px] border-solid border-gray-150 rounded-md p-4'>
           <%= area_chart @solutions, colors: %w[#38D352] %>
