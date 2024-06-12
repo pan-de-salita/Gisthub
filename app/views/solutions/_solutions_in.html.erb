@@ -1,13 +1,22 @@
 <div class='flex flex-col pb-4'>
-  <%= @test %>
-  <div class='w-full flex justify-between items-center gap-4 text-lg p-4 '>
+  <div
+    class='
+      w-full flex flex-col md:flex-row lg:flex-row md:justify-between
+      lg:justify-between md:items-center lg:items-center gap-4 text-md p-4
+    '
+  >
     <div>
       <span class='h-8'>
-        <%= if params[:programming_language]
-          "#{@user.alias} / solutions / #{params[:programming_language]}"
-        else
-          "#{@user.alias} / solutions"
-        end %>
+        <% if params[:programming_language] %>
+          <a href="<%= overview_path %>" class='text-blue-400'><%= @user.alias %></a>
+          /
+          <a href="<%= solutions_path %>" class='text-blue-400'>solutions</a>
+          /
+          <%= params[:programming_language] %>
+        <% else %>
+          <a href="<%= overview_path %>" class='text-blue-400'><%= @user.alias %></a>
+          / solutions
+        <% end %>
       </span>
       <span
         class='
@@ -21,10 +30,16 @@
         end %>
       </span>
     </div>
-    <a href="<%= new_solution_path %>">
-      <button class='text-xs md:text-sm lg:text-sm rounded-md bg-green-700 px-4 py-2'>
+    <a
+      href="<%= params[:programming_language] ? new_solution_path(programming_language: params[:programming_language]) : new_solution_path %>"
+    >
+      <button
+        class='
+          text-xs md:text-sm lg:text-sm rounded-md bg-green-700 px-4 py-2 w-full
+        '
+      >
         <i class="fa-solid fa-code"></i>
-        New
+        <%= "New solution #{params[:programming_language] ? "in " + params[:programming_language] : ""}" %>
       </button>
     </a>
   </div>
@@ -32,9 +47,11 @@
     <% solutions_to_show =
       (
         if params[:programming_language]
-          @user.solutions_in(params[:programming_language])
+          @user
+            .solutions_in(params[:programming_language])
+            .sort { |a, b| b.updated_at <=> a.updated_at }
         else
-          @solutions
+          @solutions.sort { |a, b| b.updated_at <=> a.updated_at }
         end
       ) %>
     <% if !solutions_to_show.empty? %>
@@ -44,9 +61,10 @@
             flex flex-col gap-4 pb-4 rounded-md border-[1px] border-solid border-gray-150
           '
         >
-          <div class='flex flex-col gap-4 flex-grow'>
-            <div class='rounded-t-md py-4 px-4 bg-gray-600 flex items-center'>
+          <div class='flex flex-col gap-4 flex-grow min-w-full max-w-[70.063rem] '>
+            <div class='rounded-t-md p-4 bg-gray-600 flex justify-between items-center'>
               <span class='text-sm font-bold'><%= solution.title %></span>
+              <span class='text-sm font-bold'><%= solution.updated_at.strftime("%B %d") %></span>
             </div>
             <p class='px-4 text-sm text-gray-200 '>
               <%= solution.instructions %>
@@ -54,10 +72,10 @@
             <code
               class='
                 text-xs px-4 py-6 border-[1px] border-solid border-gray-150 border-l-0
-                border-r-0 bg-royal-500
+                border-r-0 bg-royal-500 overflow-x-auto
               '
             >
-              <%= solution.attempt %>
+              <pre><%= solution.attempt %></pre>
             </code>
             <div class='px-4 flex items-center '>
               <span class='text-xs'>
@@ -73,10 +91,12 @@
                 <% end %>
               </ul>
             </div>
-            <div class='text-sm px-4 text-blue-500'>
-              <%= link_to "Refactor", "#" %>
+            <div class='text-xs px-4 pt-4'>
+              <%= solution.programming_language %>
               <span class='text-gray-100'>&nbsp;·&nbsp;</span>
-              <%= link_to "Delete", "#" %>
+              <%= link_to "Refactor", edit_solution_path(solution), class: "text-blue-400" %>
+              <span class='text-gray-100'>&nbsp;·&nbsp;</span>
+              <%= link_to "Delete", "#", class: "text-red-400" %>
             </div>
           </div>
         </div>

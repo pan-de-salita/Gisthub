@@ -10,5 +10,9 @@ Rails.application.routes.draw do
   get 'solutions', to: 'solutions#index', as: 'solutions'
   get 'solutions/in_language/:programming_language', to: 'solutions#index', as: 'solutions_in_language'
   get 'solutions/new', to: 'solutions#new', as: 'new_solution'
+  # get 'solutions/new/:programming_language', to: 'solutions#new', as: 'new_solution_in_language'
   post 'solutions', to: 'solutions#create'
+  get 'solutions/:id/edit', to: 'solutions#edit', as: 'edit_solution'
+  patch 'solution/:id', to: 'solutions#update'
+  get 'solution/:id', to: 'solutions#show', as: 'solution'
 end

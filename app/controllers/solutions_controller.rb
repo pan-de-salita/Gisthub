@@ -5,18 +5,20 @@ class SolutionsController < ApplicationController
 
   def solutions_in_language; end
 
+  def show; end
+
   def new
     @solution = Solution.new
   end
 
   def create
-    @solution = Solution.new(solution_params)
+    @solution = @user.solutions.new(solution_params)
     @solution.tags = params[:solution][:tags].split(',') if params[:solution][:tags].present?
 
     respond_to do |format|
       if @solution.save
         format.html { redirect_to solutions_path, notice: 'Solution was successfully created.' }
-        format.json { render :show, status: :created, location: @micropost }
+        format.json { render :show, status: :created, location: @solution }
       else
         puts "ERRORS: #{@solution.errors.full_messages}"
         format.html { redirect_to solutions_path :new, status: :unprocessable_entity }
@@ -25,7 +27,34 @@ class SolutionsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @solution = @user.solutions.find(params[:id])
+  end
+
+  def update
+    @solution = @user.solutions.find(params[:id])
+    tags_array = solution_params[:tags].split
+
+    respond_to do |format|
+      if @solution.update(tags: tags_array)
+        if @solution.update(solution_params.except(:tags))
+          format.html do
+            redirect_to solutions_url(programming_language: @solution.programming_language),
+                        notice: 'Solution was successfully updated.'
+          end
+          format.json { render :show, status: :ok, location: @solution }
+        else
+          puts "ERRORS: #{@solution.errors.full_messages}"
+          format.html { redirect_to solutions_path :new, status: :unprocessable_entity }
+          format.json { render json: @solution.errors, status: :unprocessable_entity }
+        end
+      else
+        puts "ERRORS: #{@solution.errors.full_messages}"
+        format.html { redirect_to solutions_path :new, status: :unprocessable_entity }
+        format.json { render json: @solution.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   private
 
@@ -46,7 +75,7 @@ class SolutionsController < ApplicationController
   end
 
   def solution_params
-    params.require(:solution).permit(:title, :instructions, :attempt, :programming_language, :tags, :language_id,
-                                     :user_id)
+    params.require(:solution)
+          .permit(:title, :instructions, :attempt, :programming_language, :tags, :language_id, :user_id)
   end
 end

@@ -91,7 +91,7 @@
                   </div>
                   <div class='text-gray-200 hidden md:hidden lg:block'>
                     <span>Last use:</span>
-                    <span><%= @user.solutions_in(language).last.created_at.strftime("%B %d") %></span>
+                    <span><%= @user.solutions_in(language).last.updated_at.strftime("%B %d") %></span>
                   </div>
                 </div>
                 <div class='flex flex-col gap-2 h-full'>
