@@ -11,7 +11,7 @@
         >
           <span class='text-2xl font-bold'>Submit a new solution</span>
           <p class='text-sm text-gray-400'>A solution is a successful attempt at solving a coding problem. So
-            belated congratulations, I guess!</p>
+            belated congratulations I guess!</p>
         </div>
         <div
           class='
@@ -81,7 +81,7 @@
 
         </div>
 
-        <div class='w-full px-4 flex flex-col gap-1'>
+        <div class='w-full px-4 pb-2 flex flex-col gap-1'>
           <%= form.label :attempt, class: "text-sm font-bold pb-1" %>
           <%= form.text_area :attempt,
                          class:
@@ -94,6 +94,15 @@
                           class:
                             "text-sm mx-4 px-2 border-1[px] border-solid border-gray-150 bg-royal-500 placeholder:text-gray-150 rounded-md",
                           value: 1 %>
+        <div
+          class='
+            mx-4 py-4 border-[1px] border-solid border-gray-150 border-l-0 border-r-0
+          '
+        >
+          <p class='text-sm text-gray-400 italic'><i class="fa-solid fa-hammer"></i>
+            Before hitting
+            <span class='text-green-400 font-bold'>Submit</span>, take your time to refactor.</p>
+        </div>
         <div class='self-end'>
           <%= form.submit value: "Submit solution",
                       class:
