@@ -1,0 +1,106 @@
+<div class='w-full flex justify-center pt-8'>
+  <div class='w-[48rem] px-4 pb-4'>
+    <%= form_with(model: solution, 
+              class: "flex flex-col gap-4 pb-4") do |form| %>
+      <div class='flex flex-col gap-4 flex-grow'>
+        <div
+          class='
+            mt-4 mx-4 pb-4 flex flex-col justify-center border-[1px] border-solid border-t-0
+            border-l-0 border-r-0 border-gray-150
+          '
+        >
+          <span class='text-2xl font-bold'>Submit a new solution</span>
+          <p class='text-sm text-gray-400'>A solution is a successful attempt at solving a coding problem. So
+            belated congratulations, I guess!</p>
+        </div>
+        <div
+          class='
+            mx-4 flex flex-col gap-4 border-[1px] border-solid border-gray-150 border-t-0
+            border-l-0 border-r-0 pb-4
+          '
+        >
+          <p class='text-sm text-gray-400 italic'>All fields are necessary, mate.</p>
+
+          <div
+            class='
+              flex flex-col md:flex-row lg:flex-row justify-center items-start gap-4
+            '
+          >
+            <div class='w-full md:min-w-[60%] lg:md:min-w-[60%] flex flex-col gap-1'>
+              <%= form.label :title, class: "text-sm font-bold pb-1" %>
+              <%= form.text_field :title,
+                              class:
+                                "w-full text-sm px-2 border-1[px] border-solid border-gray-150 bg-transparent placeholder:text-gray-150 rounded-md",
+                              placeholder: "Does my number look big in this?" %>
+            </div>
+            <div class='w-full md:flex-grow lg:flex-grow flex flex-col gap-1'>
+              <%= form.label :programming_language, class: "text-sm font-bold pb-1" %>
+              <%= form.text_field :programming_language,
+                              class:
+                                "w-full text-sm px-2 border-1[px] border-solid border-gray-150 bg-transparent placeholder:text-gray-150 rounded-md",
+                              placeholder: "Ruby" %>
+            </div>
+          </div>
+
+          <p class='text-sm text-gray-400 italic'>
+            Great solution titles are short and memorable. Need inspiration?
+            How about
+            <span class='font-bold text-green-400'>expert-octo-rotary-phone</span>
+            ?
+          </p>
+
+          <div class='w-full flex flex-col gap-1'>
+            <%= form.label :instructions, class: "text-sm font-bold pb-1" %>
+            <%= form.text_area :instructions,
+                           class:
+                             "w-full text-sm px-2 border-1[px] border-solid border-gray-150 bg-transparent placeholder:text-gray-150 rounded-md",
+                           placeholder:
+                             "A Narcissistic Number (or Armstrong Number) is a positive number which is the sum of its own digits, each raised to the power of the number of digits in a given base. In this Kata, we will restrict ourselves to decimal (base 10).\n\nThe Challenge: Your code must return true or false (not 'true' and 'false') depending upon whether the given number is a Narcissistic number in base 10.",
+                           rows: 6 %>
+          </div>
+
+          <div class='w-full flex flex-col gap-1'>
+            <%= form.label :tags, class: "text-sm font-bold pb-1" %>
+            <%= form.text_field :tags,
+                            class:
+                              "w-full text-sm px-2 border-1[px] border-solid border-gray-150 bg-transparent placeholder:text-gray-150 rounded-md",
+                            placeholder: "mathematics, algorithms" %>
+          </div>
+
+          <p class='text-sm text-gray-400 italic'>
+            Make<span class='text-green-400 font-bold'>,
+            </span>sure<span class='text-green-400 font-bold'>,
+            </span>each<span class='text-green-400 font-bold'>,
+            </span>tag<span class='text-green-400 font-bold'>,
+            </span>is<span class='text-green-400 font-bold'>,
+            </span>separated<span class='text-green-400 font-bold'>,
+            </span>by<span class='text-green-400 font-bold'>,
+            </span>a<span class='text-green-400 font-bold'>,
+            </span>comma.
+          </p>
+
+        </div>
+
+        <div class='w-full px-4 flex flex-col gap-1'>
+          <%= form.label :attempt, class: "text-sm font-bold pb-1" %>
+          <%= form.text_area :attempt,
+                         class:
+                           "w-full text-sm px-2 border-1[px] border-solid border-gray-150 bg-transparent placeholder:text-gray-150 rounded-md",
+                         placeholder:
+                           "def narcissistic?(num)\n\tnum == num.to_s.chars.map { |n| n.to_i**num.to_s.length }.sum\nend",
+                         rows: 10 %>
+        </div>
+        <%= form.hidden_field :user_id,
+                          class:
+                            "text-sm mx-4 px-2 border-1[px] border-solid border-gray-150 bg-royal-500 placeholder:text-gray-150 rounded-md",
+                          value: 1 %>
+        <div class='self-end'>
+          <%= form.submit value: "Submit solution",
+                      class:
+                        "mx-4 px-4 py-2 text-sm rounded-md bg-green-700 cursor-pointer" %>
+
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

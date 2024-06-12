@@ -4,6 +4,21 @@
     border-solid border-gray-150 border-t-0 border-l-0 border-r-0 min-h-screen
   '
 >
+  <% if @solution != nil && @solution.errors.any? %>
+    <div
+      id="error_explanation"
+      class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3"
+    >
+      <h2><%= pluralize(@solution.errors.count, "error") %>
+        prohibited this micropost from being saved:</h2>
+
+      <ul>
+        <% @solution.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div
     class='
       min-w-80 border-[1px] border-solid border-gray-150 border-t-0 border-l-0
@@ -34,6 +49,13 @@
             >
               <i class="fa-solid fa-glasses text-gray-400"></i>
               <%= @user.alias %>
+              <span
+                class='
+                  border-[1px] border-solid border-gray-150 rounded-2xl px-2 text-gray-200 text-xs
+                '
+              >
+                <%= @solutions.count %>
+              </span>
             </button>
           </a>
         </div>

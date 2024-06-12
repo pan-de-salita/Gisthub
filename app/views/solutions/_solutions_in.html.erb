@@ -1,23 +1,32 @@
 <div class='flex flex-col pb-4'>
-  <div class=' flex items-center gap-2 text-lg p-4 '>
-    <h1 class='h-8'>
-      <%= if params[:programming_language]
-        "#{@user.alias} / solutions / #{params[:programming_language]}"
-      else
-        "#{@user.alias} / solutions"
-      end %>
-    </h1>
-    <span
-      class='
-        border-[1px] border-solid border-gray-150 rounded-xl px-2 text-gray-200 text-sm
-      '
-    >
-      <%= if params[:programming_language]
-        @user.solutions_in(params[:programming_language]).count
-      else
-        @solutions.count
-      end %>
-    </span>
+  <%= @test %>
+  <div class='w-full flex justify-between items-center gap-4 text-lg p-4 '>
+    <div>
+      <span class='h-8'>
+        <%= if params[:programming_language]
+          "#{@user.alias} / solutions / #{params[:programming_language]}"
+        else
+          "#{@user.alias} / solutions"
+        end %>
+      </span>
+      <span
+        class='
+          border-[1px] border-solid border-gray-150 rounded-xl px-2 text-gray-200 text-sm
+        '
+      >
+        <%= if params[:programming_language]
+          @user.solutions_in(params[:programming_language]).count
+        else
+          @solutions.count
+        end %>
+      </span>
+    </div>
+    <a href="<%= new_solution_path %>">
+      <button class='text-xs md:text-sm lg:text-sm rounded-md bg-green-700 px-4 py-2'>
+        <i class="fa-solid fa-code"></i>
+        New
+      </button>
+    </a>
   </div>
   <div class='flex flex-col gap-4 px-4'>
     <% solutions_to_show =
@@ -32,17 +41,16 @@
       <% solutions_to_show.each do |solution| %>
         <div
           class='
-            flex flex-col gap-2 pb-4 rounded-md border-[1px] border-solid border-gray-150
+            flex flex-col gap-4 pb-4 rounded-md border-[1px] border-solid border-gray-150
           '
         >
-          <div class='flex flex-col gap-2 flex-grow'>
+          <div class='flex flex-col gap-4 flex-grow'>
             <div class='rounded-t-md py-4 px-4 bg-gray-600 flex items-center'>
-              <span class='text-md font-bold'><%= solution.title %></span>
+              <span class='text-sm font-bold'><%= solution.title %></span>
             </div>
             <p class='px-4 text-sm text-gray-200 '>
               <%= solution.instructions %>
             </p>
-            <span class='px-4 text-sm text-green-400 font-bold'>Solution:</span>
             <code
               class='
                 text-xs px-4 py-6 border-[1px] border-solid border-gray-150 border-l-0
