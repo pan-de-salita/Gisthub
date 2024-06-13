@@ -16,8 +16,6 @@ class HeadquartersController < ApplicationController
     end
   end
 
-  def solutions; end
-
   private
 
   def set_user

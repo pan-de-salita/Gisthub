@@ -20,7 +20,7 @@
       </span>
       <span
         class='
-          border-[1px] border-solid border-gray-150 rounded-xl px-2 text-gray-200 text-sm
+          border-[1px] border-solid border-gray-150 rounded-xl px-2 text-gray-400 text-sm
         '
       >
         <%= if params[:programming_language]
@@ -38,81 +38,122 @@
           text-xs md:text-sm lg:text-sm rounded-md bg-green-700 px-4 py-2 w-full
         '
       >
-        <i class="fa-solid fa-code"></i>
         <%= "New solution #{params[:programming_language] ? "in " + params[:programming_language] : ""}" %>
       </button>
     </a>
   </div>
-  <div class='flex flex-col gap-4 px-4'>
-    <% solutions_to_show =
-      (
-        if params[:programming_language]
-          @user
-            .solutions_in(params[:programming_language])
-            .sort { |a, b| b.updated_at <=> a.updated_at }
-        else
-          @solutions.sort { |a, b| b.updated_at <=> a.updated_at }
-        end
-      ) %>
-    <% if !solutions_to_show.empty? %>
-      <% solutions_to_show.each do |solution| %>
-        <div
-          class='
-            flex flex-col gap-4 pb-4 rounded-md border-[1px] border-solid border-gray-150
-          '
-        >
-          <div class='flex flex-col gap-4 flex-grow'>
-            <div class='rounded-t-md p-4 bg-gray-600 flex justify-between items-center'>
-              <span class='text-sm font-bold'><%= solution.title %></span>
-              <span class='text-sm font-bold'><%= solution.updated_at.strftime("%B %d") %></span>
-            </div>
-            <p class='px-4 text-sm text-gray-200 '>
-              <%= solution.instructions %>
-            </p>
-            <code
-              class='
-                text-xs px-4 py-6 border-[1px] border-solid border-gray-150 border-l-0
-                border-r-0 bg-royal-500
-              '
-            >
-              <pre class='whitespace-pre-wrap'><%= solution.attempt %></pre>
-            </code>
-            <div class='px-4 flex items-center '>
-              <span class='text-xs'>
-                Tags:&nbsp;&nbsp;
-              </span>
-              <ul class='flex flex-wrap gap-2'>
-                <% solution.tags.each do |tag| %>
-                  <li
-                    class='
-                      text-xs border-[1px] border-solid border-gray-150 px-2 py-1 rounded-md
-                    '
-                  ><%= tag %></li>
-                <% end %>
-              </ul>
-            </div>
-            <div class='text-xs px-4 pt-4'>
-              <%= solution.programming_language %>
-              <span class='text-gray-100'>&nbsp;·&nbsp;</span>
-              <%= link_to "Refactor", edit_solution_path(solution), class: "text-blue-400" %>
-              <span class='text-gray-100'>&nbsp;·&nbsp;</span>
-              <%= link_to "Delete", "#", class: "text-red-400" %>
+  <div class='flex justify-between items-start gap-2'>
+    <div class='flex flex-col gap-4 px-4 w-full md:flex-grow lg:flex-grow'>
+      <% solutions_to_show =
+        (
+          if params[:programming_language]
+            @user
+              .solutions_in(params[:programming_language])
+              .sort { |a, b| b.updated_at <=> a.updated_at }
+          else
+            @solutions.sort { |a, b| b.updated_at <=> a.updated_at }
+          end
+        ) %>
+      <% if !solutions_to_show.empty? %>
+        <% solutions_to_show.each do |solution| %>
+          <div
+            class='
+              flex flex-col gap-4 pb-4 rounded-md border-[1px] border-solid border-gray-150
+            '
+          >
+            <div class='flex flex-col gap-4 flex-grow'>
+              <div class='rounded-t-md p-4 bg-gray-600 flex justify-between items-center'>
+                <span class='text-sm font-bold'><%= solution.title %></span>
+                <span class='text-sm font-bold'><%= solution.updated_at.strftime("%B %d") %></span>
+              </div>
+              <p class='px-4 text-sm text-gray-400 whitespace-pre-wrap'><%= solution.instructions %></p>
+              <code
+                class='
+                  text-xs px-4 py-6 border-[1px] border-solid border-gray-150 border-l-0
+                  border-r-0 bg-royal-500 whitespace-pre-wrap
+                '
+              ><%= solution.attempt %></code>
+              <div class='px-4 flex items-center '>
+                <span class='text-xs'>
+                  Tags:&nbsp;&nbsp;
+                </span>
+                <ul class='flex flex-wrap gap-2'>
+                  <% solution.tags.each do |tag| %>
+                    <li
+                      class='
+                        text-xs border-[1px] border-solid border-gray-150 px-2 py-1 rounded-md
+                      '
+                    ><%= tag %></li>
+                  <% end %>
+                </ul>
+              </div>
+              <div class='text-xs px-4 pt-4'>
+                <%= solution.programming_language %>
+                <span class='text-gray-100'>&nbsp;·&nbsp;</span>
+                <%= link_to "Refactor", edit_solution_path(solution), class: "text-blue-400" %>
+                <span class='text-gray-100'>&nbsp;·&nbsp;</span>
+                <%= link_to "Delete", "#", class: "text-red-400" %>
+              </div>
             </div>
           </div>
+        <% end %>
+      <% else %>
+        <div
+          class='
+            px-4 py-2 w-full flex items-center border-[1px] border-solid border-gray-150
+            rounded-md
+          '
+        >
+          <div class='flex flex-col text-sm'>
+            <span>Oops! No solutions yet...</span>
+          </div>
         </div>
+
       <% end %>
-    <% else %>
+    </div>
+    <div class='w-80 flex-col gap-4 mr-4 text-xs hidden md:flex lg:flex '>
       <div
         class='
-          px-4 py-2 w-full flex items-center border-[1px] border-solid border-gray-150
-          rounded-md
+          flex flex-col gap-4 border-[1px] border-solid border-gray-150 border-t-0
+          border-l-0 border-r-0 py-4
         '
       >
-        <div class='flex flex-col text-sm'>
-          <span>Oops! No solutions yet...</span>
-        </div>
+        <span class='text-gray-400 font-bold'>
+          <%= params[:programming_language] ? "Language" : "Languages" %>
+        </span>
+        <%= params[:programming_language] ? params[:programming_language] : @languages.count %>
       </div>
+      <div
+        class='
+          flex flex-col gap-4 border-[1px] border-solid border-gray-150 border-t-0
+          border-l-0 border-r-0 py-4
+        '
+      >
+        <span class='text-gray-400 font-bold'>Solutions</span>
+        <%= @user.solutions_in(params[:programming_language]).count %>
+      </div>
+      <div
+        class='
+          flex flex-col gap-4 border-[1px] border-solid border-gray-150 border-t-0
+          border-l-0 border-r-0 py-4
+        '
+      >
+        <span class='text-gray-400 font-bold'>Tags</span>
+        <ul class='flex flex-wrap gap-2'>
+          <% @user
+          .solutions_in(params[:programming_language])
+          .each_with_object([]) { |curr, acc| curr.tags.each { |tag| acc << tag } }
+          .uniq
+          .each do |tag| %>
+            <li
+              class='
+                text-xs border-[1px] border-solid border-gray-150 px-2 py-1 rounded-md
+              '
+            ><%= tag %></li>
+          <% end %>
 
-    <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>

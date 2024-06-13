@@ -1,14 +1,12 @@
 class SolutionsController < ApplicationController
   before_action :set_user, :set_languages, :set_solutions, :set_solution
 
-  def solutions; end
-
-  def solutions_in_language; end
+  def index; end
 
   def show; end
 
   def new
-    @solution = Solution.new
+    @solution = @user.solutions.new
   end
 
   def create

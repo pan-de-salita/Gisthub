@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   resources :users do
     resources :languages
-    resources :solutions do
-      # get 'in_language', action: :index
-    end
+    resources :solutions
   end
 
   get '/overview/', to: 'headquarters#overview', as: 'overview'
@@ -15,4 +13,8 @@ Rails.application.routes.draw do
   get 'solutions/:id/edit', to: 'solutions#edit', as: 'edit_solution'
   patch 'solution/:id', to: 'solutions#update'
   get 'solution/:id', to: 'solutions#show', as: 'solution'
+
+  get 'languages/new', to: 'langauges#new', as: 'new_languages'
+  # get 'solutions/new/:programming_language', to: 'solutions#new', as: 'new_solution_in_language'
+  post 'languages', to: 'languages#create'
 end

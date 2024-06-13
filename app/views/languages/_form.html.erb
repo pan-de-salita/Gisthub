@@ -1,0 +1,12 @@
+<%= form_with(model: @user.languages.new, 
+              url: languages_path(), 
+              method: :post,
+             class: 'flex flex-col gap-4 pb-4') do |form| %>
+  <%= form.text_field :name,
+                  class:
+                    "bg-transparent border-[1px] border-solid border-gray-150 rounded-md text-sm" %>
+  <%= form.hidden_field :user_id, value: 1 %>
+  <%= form.submit value: "New language",
+              class:
+                "cursor-pointer text-xs md:text-sm lg:text-sm rounded-md bg-green-700 px-4 py-2 w-full" %>
+<% end %>

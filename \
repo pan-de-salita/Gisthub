@@ -11,6 +11,7 @@
     '
   >
     <div class='h-full flex flex-col text-md'>
+
       <div
         class='
           text-md border-[1px] border-solid border-gray-150 border-t-0 border-l-0
@@ -18,9 +19,16 @@
         '
       >
         <h2>Languages</h2>
+        <div class='flex justify-between gap-2'>
+          <%= form_with(model: @Language.new) do |form| %>
+          <% end %>
+          <button class='h-8 w-8 border-[1px] border-solid border-gray-400 rounded-md'>
+            <i class="fa-solid fa-plus text-gray-400 text-sm"></i>
+          </button>
+        </div>
       </div>
+
       <div class='h-full p-4 text-sm overflow-auto'>
-        <%= render "languages/form" %>
         <div class='justify-center pl-0'>
           <a href="<%= solutions_path %>">
             <button
@@ -41,26 +49,23 @@
           </a>
         </div>
         <% @languages.each do |language| %>
-          <%# weird behavior where if this condition is not set up, a params error shows up %>
-          <% if language.name %>
-            <a
-              href="<%= solutions_in_language_path(programming_language: language.name) %>"
-              class='flex items-center gap-2 pl-2'
-            >
-              <button class='w-full flex items-center gap-2 p-2 hover:bg-gray-150 rounded-md'>
-                └─
-                <i class="fa-solid fa-keyboard text-gray-400"></i>
-                <span><%= language.name %></span>
-                <span
-                  class='
-                    border-[1px] border-solid border-gray-150 rounded-2xl px-2 text-gray-200 text-xs
-                  '
-                >
-                  <%= language.solutions.count %>
-                </span>
-              </button>
-            </a>
-          <% end %>
+          <a
+            href="<%= solutions_in_language_path(programming_language: language.name) %>"
+            class='flex items-center gap-2 pl-2'
+          >
+            <button class='w-full flex items-center gap-2 p-2 hover:bg-gray-150 rounded-md'>
+              └─
+              <i class="fa-solid fa-keyboard text-gray-400"></i>
+              <span><%= language.name %></span>
+              <span
+                class='
+                  border-[1px] border-solid border-gray-150 rounded-2xl px-2 text-gray-200 text-xs
+                '
+              >
+                <%= language.solutions.count %>
+              </span>
+            </button>
+          </a>
         <% end %>
       </div>
     </div>

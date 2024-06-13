@@ -16,6 +16,8 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
 
   def solutions_in(lang)
-    solutions.filter { |solution| solution.language_id == languages.find_by(name: lang).id }
+    solutions.filter do |solution|
+      solution.language_id == languages.find_by(name: lang).id if languages.find_by(name: lang)
+    end
   end
 end
