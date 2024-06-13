@@ -18,17 +18,6 @@
           / solutions
         <% end %>
       </span>
-      <span
-        class='
-          border-[1px] border-solid border-gray-150 rounded-xl px-2 text-gray-400 text-sm
-        '
-      >
-        <%= if params[:programming_language]
-          @user.solutions_in(params[:programming_language]).count
-        else
-          @solutions.count
-        end %>
-      </span>
     </div>
     <a
       href="<%= params[:programming_language] ? new_solution_path(programming_language: params[:programming_language]) : new_solution_path %>"
@@ -42,7 +31,7 @@
       </button>
     </a>
   </div>
-  <div class='flex justify-between items-start gap-2'>
+  <div class='flex justify-between items-start gap-0'>
     <div class='flex flex-col gap-4 px-4 w-full md:flex-grow lg:flex-grow'>
       <% solutions_to_show =
         (
@@ -66,6 +55,7 @@
                 <span class='text-sm font-bold'><%= solution.title %></span>
                 <span class='text-sm font-bold'><%= solution.updated_at.strftime("%B %d") %></span>
               </div>
+              <span class='px-4 text-sm text-gray-400'>INSTRUCTIONS</span>
               <p class='px-4 text-sm text-gray-400 whitespace-pre-wrap'><%= solution.instructions %></p>
               <code
                 class='
@@ -87,12 +77,12 @@
                   <% end %>
                 </ul>
               </div>
-              <div class='text-xs px-4 pt-4'>
+              <div class='text-xs px-4 pt-4 flex gap-1'>
                 <%= solution.programming_language %>
                 <span class='text-gray-100'>&nbsp;·&nbsp;</span>
                 <%= link_to "Refactor", edit_solution_path(solution), class: "text-blue-400" %>
                 <span class='text-gray-100'>&nbsp;·&nbsp;</span>
-                <%= link_to "Delete", "#", class: "text-red-400" %>
+                <%= button_to "Delete", solution, method: :delete, class: "text-red-400" %>
               </div>
             </div>
           </div>
@@ -111,7 +101,7 @@
 
       <% end %>
     </div>
-    <div class='w-80 flex-col gap-4 mr-4 text-xs hidden md:flex lg:flex '>
+    <div class='w-96 flex-col gap-4 mr-4 text-sm hidden md:flex lg:flex '>
       <div
         class='
           flex flex-col gap-4 border-[1px] border-solid border-gray-150 border-t-0
@@ -130,7 +120,11 @@
         '
       >
         <span class='text-gray-400 font-bold'>Solutions</span>
-        <%= @user.solutions_in(params[:programming_language]).count %>
+        <% if params[:programming_language] %>
+          <%= @user.solutions_in(params[:programming_language]).count %>
+        <% else %>
+          <%= @user.solutions.count %>
+        <% end %>
       </div>
       <div
         class='
@@ -140,18 +134,37 @@
       >
         <span class='text-gray-400 font-bold'>Tags</span>
         <ul class='flex flex-wrap gap-2'>
-          <% @user
+          <% if params[:programming_language] %>
+            <% @user
           .solutions_in(params[:programming_language])
-          .each_with_object([]) { |curr, acc| curr.tags.each { |tag| acc << tag } }
-          .uniq
-          .each do |tag| %>
-            <li
-              class='
-                text-xs border-[1px] border-solid border-gray-150 px-2 py-1 rounded-md
-              '
-            ><%= tag %></li>
+          .each_with_object(Hash.new(0)) { |curr, acc| curr.tags.each { |tag| acc[tag] += 1 } }
+          .each do |key, val| %>
+              <li
+                class='
+                  text-xs border-[1px] border-solid border-gray-150 px-2 py-1 rounded-md flex
+                  justify-between gap-2 items-center
+                '
+              >
+                <span><%= key %></span>
+                <span class='rounded-2xl border-[1px] border-solid border-gray-150 px-2'><%= val %></span>
+              </li>
+            <% end %>
+          <% else %>
+            <% @user
+          .solutions
+          .each_with_object(Hash.new(0)) { |curr, acc| curr.tags.each { |tag| acc[tag] += 1 } }
+          .each do |key, val| %>
+              <li
+                class='
+                  text-xs border-[1px] border-solid border-gray-150 px-2 py-1 rounded-md flex
+                  justify-between gap-2 items-center
+                '
+              >
+                <span><%= key %></span>
+                <span class='rounded-2xl border-[1px] border-solid border-gray-150 px-2'><%= val %></span>
+              </li>
+            <% end %>
           <% end %>
-
         </ul>
       </div>
     </div>

@@ -5,8 +5,8 @@
   <%= form.text_field :name,
                   class:
                     "bg-transparent border-[1px] border-solid border-gray-150 rounded-md text-sm" %>
-  <%= form.hidden_field :user_id, value: 1 %>
+  <%= form.hidden_field :user_id, value: @user.id %>
   <%= form.submit value: "New language",
               class:
-                "cursor-pointer text-xs md:text-sm lg:text-sm rounded-md bg-green-700 px-4 py-2 w-full" %>
+                "cursor-pointer text-xs md:text-sm lg:text-sm rounded-md bg-gray-300 px-4 py-2 w-full border-[1px]border-solid border-gray-150" %>
 <% end %>

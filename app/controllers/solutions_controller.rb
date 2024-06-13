@@ -54,6 +54,16 @@ class SolutionsController < ApplicationController
     end
   end
 
+  def destroy
+    @solution = @user.solutions.find(params[:id])
+    @solution.destroy!
+
+    respond_to do |format|
+      format.html { redirect_to solutions_path, notice: 'Solution was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   def set_user

@@ -7,7 +7,7 @@
   <div
     class='
       min-w-80 border-[1px] border-solid border-gray-150 border-t-0 border-l-0
-      overflow-y-auto
+      border-b-0 overflow-y-auto
     '
   >
     <div class='h-full flex flex-col text-md'>
@@ -32,7 +32,8 @@
               <%= @user.alias %>
               <span
                 class='
-                  border-[1px] border-solid border-gray-150 rounded-2xl px-2 text-gray-200 text-xs
+                  border-[1px] border-solid border-gray-150 rounded-2xl px-2 text-xs
+                  <%= current_page?(solutions_path) ? 'bg-blue-400 text-royal-500' : 'bg-transparent text-gray-200' %>
                 '
               >
                 <%= @solutions.count %>
@@ -53,7 +54,8 @@
                 <span><%= language.name %></span>
                 <span
                   class='
-                    border-[1px] border-solid border-gray-150 rounded-2xl px-2 text-gray-200 text-xs
+                    border-[1px] border-solid border-gray-150 rounded-2xl px-2 text-xs
+                    <%= request.path.include?(language.name) ? 'bg-blue-400 text-royal-500' : 'bg-transparent text-gray-200' %>
                   '
                 >
                   <%= language.solutions.count %>
