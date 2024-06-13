@@ -61,7 +61,7 @@
             flex flex-col gap-4 pb-4 rounded-md border-[1px] border-solid border-gray-150
           '
         >
-          <div class='flex flex-col gap-4 flex-grow min-w-full max-w-[70.063rem] '>
+          <div class='flex flex-col gap-4 flex-grow'>
             <div class='rounded-t-md p-4 bg-gray-600 flex justify-between items-center'>
               <span class='text-sm font-bold'><%= solution.title %></span>
               <span class='text-sm font-bold'><%= solution.updated_at.strftime("%B %d") %></span>
@@ -72,10 +72,10 @@
             <code
               class='
                 text-xs px-4 py-6 border-[1px] border-solid border-gray-150 border-l-0
-                border-r-0 bg-royal-500 overflow-x-auto
+                border-r-0 bg-royal-500
               '
             >
-              <pre><%= solution.attempt %></pre>
+              <pre class='whitespace-pre-wrap'><%= solution.attempt %></pre>
             </code>
             <div class='px-4 flex items-center '>
               <span class='text-xs'>
