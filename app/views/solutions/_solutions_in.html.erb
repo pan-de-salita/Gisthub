@@ -136,9 +136,11 @@
         <ul class='flex flex-wrap gap-2'>
           <% if params[:programming_language] %>
             <% @user
-          .solutions_in(params[:programming_language])
-          .each_with_object(Hash.new(0)) { |curr, acc| curr.tags.each { |tag| acc[tag] += 1 } }
-          .each do |key, val| %>
+                      .solutions_in(params[:programming_language])
+              .map(&:tags)
+              .flatten
+              .each_with_object(Hash.new(0)) { |curr, acc| acc[curr.strip] += 1 } 
+              .each do |key, val| %>
               <li
                 class='
                   text-xs border-[1px] border-solid border-gray-150 px-2 py-1 rounded-md flex
@@ -151,9 +153,11 @@
             <% end %>
           <% else %>
             <% @user
-          .solutions
-          .each_with_object(Hash.new(0)) { |curr, acc| curr.tags.each { |tag| acc[tag] += 1 } }
-          .each do |key, val| %>
+              .solutions
+              .map(&:tags)
+              .flatten
+              .each_with_object(Hash.new(0)) { |curr, acc| acc[curr.strip] += 1 } 
+              .each do |key, val| %>
               <li
                 class='
                   text-xs border-[1px] border-solid border-gray-150 px-2 py-1 rounded-md flex
