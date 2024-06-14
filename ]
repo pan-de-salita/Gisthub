@@ -16,10 +16,7 @@ class SolutionsController < ApplicationController
 
     respond_to do |format|
       if @solution.save
-        format.html do
-          redirect_to solutions_in_language_path(programming_language: @solution.programming_language),
-                      notice: 'Solution was successfully created.'
-        end
+        format.html { redirect_to solutions_path, notice: 'Solution was successfully created.' }
         format.json { render :show, status: :created, location: @solution }
       else
         puts "ERRORS: #{@solution.errors.full_messages}"
@@ -41,7 +38,7 @@ class SolutionsController < ApplicationController
       if @solution.update(tags: tags_array)
         if @solution.update(solution_params.except(:tags))
           format.html do
-            redirect_to solutions_in_language_url(programming_language: @solution.programming_language),
+            redirect_to solutions_url(programming_language: @solution.programming_language),
                         notice: 'Solution was successfully updated.'
           end
           format.json { render :show, status: :ok, location: @solution }
@@ -60,14 +57,10 @@ class SolutionsController < ApplicationController
 
   def destroy
     @solution = @user.solutions.find(params[:id])
-    language_of_to_delete = @solution.programming_language
     @solution.destroy!
 
     respond_to do |format|
-      format.html do
-        redirect_to solutions_in_language_path(language_of_to_delete),
-                    notice: 'Solution was successfully destroyed.'
-      end
+      format.html { redirect_to solutions_path, notice: 'Solution was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

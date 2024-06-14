@@ -1,7 +1,7 @@
 <div class='w-full flex justify-center pt-8'>
   <div class='w-[48rem] px-4 pb-4'>
     <%= form_with(model: solution, 
-                  url: solution_path(params[:id]),
+                  url: update_solution_path(id: solution.id),
                   class: "flex flex-col gap-4 pb-4") do |form| %>
       <div class='flex flex-col gap-4 flex-grow'>
         <div
@@ -20,7 +20,7 @@
             border-l-0 border-r-0 pb-4
           '
         >
-          <p class='text-sm text-gray-400 italic'>All fields are necessary, mate.</p>
+          <p class='text-sm text-gray-400 italic'>All fields are necessary.</p>
 
           <div
             class='
@@ -65,7 +65,11 @@
             <%= form.text_field :tags,
                             class:
                               "w-full text-sm px-2 border-1[px] border-solid border-gray-150 bg-transparent placeholder:text-gray-150 rounded-md",
-                            placeholder: "mathematics, algorithms" %>
+                            placeholder: "mathematics, algorithms",
+                            value:
+                              solution.tags[0...-1].map { |tag|
+                                "#{tag}, "
+                              } << solution.tags.last %>
           </div>
 
           <p class='text-sm text-gray-400 italic'>

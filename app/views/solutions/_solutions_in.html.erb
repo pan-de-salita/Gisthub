@@ -8,14 +8,14 @@
     <div>
       <span class='h-8'>
         <% if params[:programming_language] %>
-          <a href="<%= overview_path %>" class='text-blue-400'><%= @user.alias %></a>
+          <a href="<%= overview_path(@user.alias) %>" class='text-blue-400'><%= @user.alias %></a>
           /
-          <a href="<%= solutions_path %>" class='text-blue-400'>solutions</a>
+          <a href="<%= solutions_path(@user.alias) %>" class='text-blue-400'>Solutions</a>
           /
           <%= params[:programming_language] %>
         <% else %>
-          <a href="<%= overview_path %>" class='text-blue-400'><%= @user.alias %></a>
-          / solutions
+          <a href="<%= overview_path(@user.alias) %>" class='text-blue-400'><%= @user.alias %></a>
+          / Solutions
         <% end %>
       </span>
     </div>
@@ -31,7 +31,11 @@
       </button>
     </a>
   </div>
-  <div class='flex justify-between items-start gap-0'>
+  <div
+    class='
+      flex flex-col md:flex-col-reverse lg:flex-row justify-between items-start gap-0
+    '
+  >
     <div class='flex flex-col gap-4 px-4 w-full md:flex-grow lg:flex-grow'>
       <% solutions_to_show =
         (
@@ -55,7 +59,7 @@
                 <span class='text-sm font-bold'><%= solution.title %></span>
                 <span class='text-sm font-bold'><%= solution.updated_at.strftime("%B %d") %></span>
               </div>
-              <span class='px-4 text-sm text-gray-400'>INSTRUCTIONS</span>
+              <span class='px-4 text-sm text-gray-400'>INSTRUCTIONS:</span>
               <p class='px-4 text-sm text-gray-400 whitespace-pre-wrap'><%= solution.instructions %></p>
               <code
                 class='
@@ -80,7 +84,9 @@
               <div class='text-xs px-4 pt-4 flex gap-1'>
                 <%= solution.programming_language %>
                 <span class='text-gray-100'>&nbsp;·&nbsp;</span>
-                <%= link_to "Refactor", edit_solution_path(solution), class: "text-blue-400" %>
+                <%= link_to "Refactor",
+                edit_solution_path(solution, alias: @user.alias),
+                class: "text-blue-400" %>
                 <span class='text-gray-100'>&nbsp;·&nbsp;</span>
                 <%= button_to "Delete", solution, method: :delete, class: "text-red-400" %>
               </div>
@@ -103,14 +109,14 @@
     </div>
     <div
       class='
-        min-w-64 sm:w-full md:max-w-64 lg:max-w-72 flex-col gap-4 mr-4 text-sm hidden
-        md:flex lg:flex
+        min-w-64 w-full md:w-full lg:max-w-72 flex flex-col gap-4 mr-4 text-sm pt-4 pb-4
+        px-4 md:pt-0 lg:pl-0 lg:px-0 lg:pt-0
       '
     >
       <div
         class='
           flex flex-col gap-4 border-[1px] border-solid border-gray-150 border-t-0
-          border-l-0 border-r-0 py-4
+          border-l-0 border-r-0 pb-4
         '
       >
         <span class='text-gray-400 font-bold'>
@@ -145,6 +151,7 @@
               .map(&:tags)
               .flatten
               .each_with_object(Hash.new(0)) { |curr, acc| acc[curr.strip] += 1 } 
+              .sort_by { |key, value| -value }
               .each do |key, val| %>
               <li
                 class='
@@ -162,6 +169,7 @@
               .map(&:tags)
               .flatten
               .each_with_object(Hash.new(0)) { |curr, acc| acc[curr.strip] += 1 } 
+              .sort_by { |key, value| -value }
               .each do |key, val| %>
               <li
                 class='

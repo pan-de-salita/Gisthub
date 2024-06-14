@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :languages, dependent: :destroy
-  has_many :solutions, dependent: :destroy
+  has_many :solutions
 
   before_save { email.downcase! }
 

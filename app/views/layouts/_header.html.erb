@@ -6,7 +6,9 @@
           h-8 w-8 border-2 border-gray-100 rounded-full flex justify-center items-center
         '
       >
-        <a href="/"><i class="fa-solid fa-vial fa-md text-gray-100"></i></a>
+        <a href=<%= overview_path(@user.alias) %>>
+          <i class="fa-solid fa-vial fa-md text-gray-100"></i>
+        </a>
       </div>
       <div
         class='
@@ -15,12 +17,15 @@
       >
         <span class='text-gray-200 md:text-sm lg:text-sm'>Solvent&nbsp;/&nbsp;</span>
         <strong class="text-gray-100 text-sm">
-          <span><%= @user.alias %></span>
+          <span><%= @user.alias if @user %></span>
         </strong>
       </div>
     </div>
-    <div class='flex items-center'>
-      <%= identicon_for user: @user %>
+    <div class='flex items-center gap-4'>
+      <%= button_to logout_path, method: :delete, class: 'h-8 w-8 border-[1px] border-solid border-gray-400 rounded-md flex justify-center items-center text-gray-400' do %>
+        <i class="fa-solid fa-right-from-bracket"></i>
+      <% end %>
+      <%= identicon_for user: @user if @user %>
     </div>
   </div>
   <nav
@@ -36,11 +41,11 @@
     >
       <li
         class='
-          h-12 border-2 border-solid <%= current_page?(overview_path) ? 'border-red-400 font-bold' : 'border-transparent font-medium' %> border-t-0
+          h-12 border-2 border-solid <%= request.path.include?('overview') ? 'border-red-400 font-bold' : 'border-transparent font-medium' %> border-t-0
           border-l-0 border-r-0 flex items-center
         '
       >
-        <a href="<%= overview_path %>" class='flex items-center gap-2'>
+        <a href="<%= overview_path(@user.alias) %>" class='flex items-center gap-2'>
           <i class="fa-solid fa-book-open"></i>
           <span>Overview</span>
         </a>
@@ -51,7 +56,7 @@
           border-l-0 border-r-0 flex items-center
         '
       >
-        <a href="<%= solutions_path %>" class='flex items-center gap-2'>
+        <a href="<%= solutions_path(@user.alias) %>" class='flex items-center gap-2'>
           <i class="fa-solid fa-flask-vial"></i>
           <span>Solutions</span>
         </a>

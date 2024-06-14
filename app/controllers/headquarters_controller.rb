@@ -1,4 +1,5 @@
 class HeadquartersController < ApplicationController
+  before_action :authenticate_user!, only: [:overview]
   before_action :set_user, :set_languages, :set_solutions
 
   def overview
@@ -19,7 +20,7 @@ class HeadquartersController < ApplicationController
   private
 
   def set_user
-    @user = User.find(1)
+    @user = current_user
   end
 
   def set_languages

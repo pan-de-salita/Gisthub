@@ -1,4 +1,5 @@
 class LanguagesController < ApplicationController
+  before_action :authenticate_user!, only: %i[new create]
   before_action :set_user, :set_languages, :set_solutions
 
   def new
@@ -10,47 +11,20 @@ class LanguagesController < ApplicationController
 
     respond_to do |format|
       if @language.save
-        format.html { redirect_to solutions_path, notice: 'Language was successfully created.' }
+        format.html { redirect_to solutions_path(@user.alias), notice: 'Language was successfully created.' }
         format.json { render :show, status: :created, location: @language }
       else
         puts "ERRORS: #{@language.errors.full_messages}"
-        format.html { redirect_to solutions_path :new, status: :unprocessable_entity }
+        format.html { redirect_to solutions_path(@user.alias) :new, status: :unprocessable_entity }
         format.json { render json: @language.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  def edit; end
-
-  def update
-    # @language = @user.language.find(params[:programming_language])
-    # tags_array = solution_params[:tags].split
-    #
-    # respond_to do |format|
-    #   if @solution.update(tags: tags_array)
-    #     if @solution.update(solution_params.except(:tags))
-    #       format.html do
-    #         redirect_to solutions_url(programming_language: @solution.programming_language),
-    #                     notice: 'Solution was successfully updated.'
-    #       end
-    #       format.json { render :show, status: :ok, location: @solution }
-    #     else
-    #       puts "ERRORS: #{@solution.errors.full_messages}"
-    #       format.html { redirect_to solutions_path :new, status: :unprocessable_entity }
-    #       format.json { render json: @solution.errors, status: :unprocessable_entity }
-    #     end
-    #   else
-    #     puts "ERRORS: #{@solution.errors.full_messages}"
-    #     format.html { redirect_to solutions_path :new, status: :unprocessable_entity }
-    #     format.json { render json: @solution.errors, status: :unprocessable_entity }
-    #   end
-    # end
-  end
-
   private
 
   def set_user
-    @user = User.find(1)
+    @user = current_user
   end
 
   def set_languages

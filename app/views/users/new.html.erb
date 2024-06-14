@@ -1,0 +1,68 @@
+<div class='flex flex-col items-center mx-4 mt-10 gap-4'>
+  <div
+    class='
+      h-14 w-14 border-2 border-gray-100 rounded-full flex justify-center items-center
+    '
+  >
+    <i class="fa-solid fa-vial fa-md text-gray-100 text-4xl"></i>
+  </div>
+
+  <h1 class='text-xl'>Sign up for an account</h1>
+
+  <%= form_for User.new do |form| %>
+    <div
+      class='
+        md:flex-grow lg:flex-grow gap-4 w-72 mx-4 pb-4 flex flex-col justify-center
+        text-sm bg-gray-600 p-4 rounded-md border-[1px] border-solid border-gray-150
+      '
+    >
+      <div class='flex flex-col gap-2'>
+        <%= form.label :alias %>
+        <%= form.text_field :alias,
+                        placeholder: "Pleyto",
+                        class:
+                          "w-full text-sm px-2 border-1[px] border-solid border-gray-150 bg-gray-500 placeholder:text-gray-150 rounded-md" %>
+      </div>
+      <div class='flex flex-col gap-2'>
+        <%= form.label :bio %>
+        <%= form.text_area :bio,
+                       placeholder: "Titser ni Aristotle.",
+                       class:
+                         "w-full text-sm px-2 border-1[px] border-solid border-gray-150 bg-gray-500 placeholder:text-gray-150 rounded-md" %>
+      </div>
+      <div class='flex flex-col gap-2'>
+        <%= form.label :email %>
+        <%= form.text_field :email,
+                        placeholder: "pleyto@idealism.com",
+                        class:
+                          "w-full text-sm px-2 border-1[px] border-solid border-gray-150 bg-gray-500 placeholder:text-gray-150 rounded-md" %>
+      </div>
+      <div class='flex flex-col gap-2'>
+        <%= form.label :password %>
+        <%= form.password_field :password,
+                            placeholder: "foobar",
+                            class:
+                              "w-full text-sm px-2 border-1[px] border-solid border-gray-150 bg-gray-500 placeholder:text-gray-150 rounded-md" %>
+      </div>
+      <div class='flex flex-col gap-2'>
+        <%= form.label :password_confirmation %>
+        <%= form.password_field :password_confirmation,
+                            placeholder: "foobar",
+                            class:
+                              "w-full text-sm px-2 border-1[px] border-solid border-gray-150 bg-gray-500 placeholder:text-gray-150 rounded-md" %>
+      </div>
+      <%= form.submit "Create Account",
+                  class: "bg-green-700 rounded-md py-1 cursor-pointer" %>
+    </div>
+  <% end %>
+
+  <div
+    class='
+      w-72 flex justify-center text-sm p-4 rounded-md border-[1px] border-solid
+      border-gray-150
+    '
+  >
+    <span>Already have an account?</span>&nbsp;<%= link_to "Sign in", root_path, class: "text-blue-400" %>
+  </div>
+
+</div>

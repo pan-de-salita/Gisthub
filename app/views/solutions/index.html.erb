@@ -22,7 +22,7 @@
       <div class='h-full p-4 text-sm overflow-auto'>
         <%= render "languages/form" %>
         <div class='justify-center pl-0'>
-          <a href="<%= solutions_path %>">
+          <a href="<%= solutions_path(@user.alias) %>">
             <button
               class='
                 flex items-center gap-2 w-full p-2 hover:bg-gray-150 rounded-md
@@ -33,7 +33,7 @@
               <span
                 class='
                   border-[1px] border-solid border-gray-150 rounded-2xl px-2 text-xs
-                  <%= current_page?(solutions_path) ? 'bg-blue-400 text-royal-500' : 'bg-transparent text-gray-200' %>
+                  <%= current_page?(solutions_path(@user.alias)) ? 'bg-blue-400 text-royal-500' : 'bg-transparent text-gray-200' %>
                 '
               >
                 <%= @solutions.count %>
