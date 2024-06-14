@@ -1,6 +1,5 @@
 class User < ApplicationRecord
-  has_many :languages, dependent: :destroy
-  has_many :solutions
+  has_many :solutions, dependent: :destroy
 
   before_save { email.downcase! }
 
@@ -17,7 +16,7 @@ class User < ApplicationRecord
 
   def solutions_in(lang)
     solutions.filter do |solution|
-      solution.language_id == languages.find_by(name: lang).id if languages.find_by(name: lang)
+      solution.language_id == Language.find_by(name: lang).id if Language.find_by(name: lang)
     end
   end
 end

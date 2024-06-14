@@ -65,7 +65,7 @@ class SolutionsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        redirect_to solutions_in_language_path(language_of_to_delete),
+        redirect_to solutions_path(@user.alias),
                     notice: 'Solution was successfully destroyed.'
       end
       format.json { head :no_content }
@@ -79,7 +79,9 @@ class SolutionsController < ApplicationController
   end
 
   def set_languages
-    @languages = @user.languages
+    @languages = @user.solutions.map(&:programming_language).uniq.map do |language_str|
+      Language.find_by(name: language_str)
+    end
   end
 
   def set_solutions

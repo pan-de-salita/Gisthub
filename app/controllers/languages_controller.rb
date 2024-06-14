@@ -15,7 +15,7 @@ class LanguagesController < ApplicationController
         format.json { render :show, status: :created, location: @language }
       else
         puts "ERRORS: #{@language.errors.full_messages}"
-        format.html { redirect_to solutions_path(@user.alias) :new, status: :unprocessable_entity }
+        format.html { redirect_to solutions_path(@user.alias), :new, status: :unprocessable_entity }
         format.json { render json: @language.errors, status: :unprocessable_entity }
       end
     end
@@ -28,7 +28,7 @@ class LanguagesController < ApplicationController
   end
 
   def set_languages
-    @languages = @user.languages
+    @languages = @user.solutions.map(&:programming_language).uniq
   end
 
   def set_solutions

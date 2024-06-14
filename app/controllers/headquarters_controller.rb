@@ -24,7 +24,7 @@ class HeadquartersController < ApplicationController
   end
 
   def set_languages
-    @languages = @user.languages
+    @languages = @user.solutions.map(&:programming_language).uniq
   end
 
   def set_solutions

@@ -13,9 +13,7 @@ class Solution < ApplicationRecord
   validates :attempt, presence: true
   validates :programming_language, presence: true
   validates :tags, presence: true
-  validates :user_id, presence: true
   validates :language_id, presence: true
-  validate :user_must_exist
   validate :language_must_exist
 
   private
@@ -29,8 +27,7 @@ class Solution < ApplicationRecord
       self.language_id = programming_language_on_record.id
       puts 'found'
     else
-      current_user_id = user_id
-      new_language = Language.create(name: capitalized_programming_language, user_id: current_user_id)
+      new_language = Language.create(name: capitalized_programming_language)
       self.language_id = new_language.id
       puts 'set'
     end
@@ -38,10 +35,6 @@ class Solution < ApplicationRecord
 
   def downcase_tags
     self.tags = tags.map(&:downcase)
-  end
-
-  def user_must_exist
-    errors.add(:user_id, 'must exist') unless User.exists?(id: user_id)
   end
 
   def language_must_exist

@@ -20,7 +20,7 @@
         <h2>Languages</h2>
       </div>
       <div class='h-full p-4 text-sm overflow-auto'>
-        <%= render "languages/form" %>
+        <%#= render "languages/form" %>
         <div class='justify-center pl-0'>
           <a href="<%= solutions_path(@user.alias) %>">
             <button
@@ -58,7 +58,10 @@
                     <%= request.path.include?(language.name) ? 'bg-blue-400 text-royal-500' : 'bg-transparent text-gray-200' %>
                   '
                 >
-                  <%= language.solutions.count %>
+                  <%= @user
+                    .solutions
+                    .filter { |solution| solution.programming_language == language.name }
+                    .count %>
                 </span>
               </button>
             </a>
