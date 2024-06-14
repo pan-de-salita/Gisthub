@@ -101,7 +101,12 @@
 
       <% end %>
     </div>
-    <div class='w-96 flex-col gap-4 mr-4 text-sm hidden md:flex lg:flex '>
+    <div
+      class='
+        min-w-64 sm:w-full md:max-w-64 lg:max-w-72 flex-col gap-4 mr-4 text-sm hidden
+        md:flex lg:flex
+      '
+    >
       <div
         class='
           flex flex-col gap-4 border-[1px] border-solid border-gray-150 border-t-0
@@ -136,7 +141,7 @@
         <ul class='flex flex-wrap gap-2'>
           <% if params[:programming_language] %>
             <% @user
-                      .solutions_in(params[:programming_language])
+              .solutions_in(params[:programming_language])
               .map(&:tags)
               .flatten
               .each_with_object(Hash.new(0)) { |curr, acc| acc[curr.strip] += 1 } 
