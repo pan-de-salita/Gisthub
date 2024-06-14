@@ -15,7 +15,7 @@
         border-l-0 border-r-0 md:border-0 lg:border-0 pb-10 md:pb-0 lg:pb-0
       '
     >
-      <div class='w-full flex flex-col gap-4'>
+      <div class='max-w-[296px] flex flex-col gap-4'>
         <div class='flex gap-4 md:flex-col lg:flex-col'>
           <div class='block md:hidden lg:hidden'>
             <%= identicon_for user: @user, identicon_width: 60, identicon_height: 60 %>
@@ -79,7 +79,9 @@
                 <div class='flex justify-between'>
                   <div class='flex gap-2 items-center'>
                     <i class="fa-solid fa-keyboard"></i>
-                    <span class='font-bold text-blue-500'><%= language %></span>
+                    <a href="<%= solutions_in_language_path(programming_language: language) %>">
+                      <span class='font-bold text-blue-500'><%= language %></span>
+                    </a>
                     <div class='flex items-center h-full'>
                       <span
                         class='

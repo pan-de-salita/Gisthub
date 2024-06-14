@@ -8,7 +8,7 @@ module ApplicationHelper
   )
     base64_identicon = RubyIdenticon.create_base64(
       (user.instance_of?(User) ? user.email : 'default'),
-      background_color: 2_022_162_301,
+      background_color: 168_041,
       grid_size: identicon_grid_size,
       square_size: identicon_square_size
     )
